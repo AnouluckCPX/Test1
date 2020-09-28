@@ -1894,6 +1894,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="icon\box.svg" />
+    <Content Include="icon\meds.svg" />
     <Content Include="Models\PharmacyContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PharmacyContext.edmx</DependentUpon>
