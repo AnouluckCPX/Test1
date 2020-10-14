@@ -12,18 +12,24 @@ namespace Test1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Unit
+    public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Unit()
+        public Customer()
         {
-            this.Products = new HashSet<Product>();
+            this.BIlls = new HashSet<BIll>();
         }
     
         public int ID { get; set; }
-        public string UnitName { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Gender { get; set; }
+        public Nullable<System.DateTime> BirthDay { get; set; }
+        public Nullable<double> Weight { get; set; }
+        public Nullable<double> Height { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<BIll> BIlls { get; set; }
     }
 }

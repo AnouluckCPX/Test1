@@ -170,15 +170,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\UnitsController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Bill.cs">
+    <Compile Include="Models\BIll.cs">
+      <DependentUpon>PharmacyContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>PharmacyContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
       <DependentUpon>PharmacyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -204,16 +212,7 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>PharmacyContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\StockIn.cs">
-      <DependentUpon>PharmacyContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StockOut.cs">
-      <DependentUpon>PharmacyContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>PharmacyContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Unit.cs">
+    <Compile Include="Models\Stock.cs">
       <DependentUpon>PharmacyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1908,13 +1907,6 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\PharmacyContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PharmacyContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\PharmacyContext.edmx.diagram">
-      <DependentUpon>PharmacyContext.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\Assets\scss\navs\_global.scss" />
     <Content Include="Content\Assets\scss\navs\_sidebar.scss" />
     <Content Include="Content\Assets\scss\navs\_topbar.scss" />
@@ -2087,6 +2079,14 @@
     <Content Include="Content\Assets\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\Assets\vendor\jquery\jquery.min.map" />
     <Content Include="Content\Assets\vendor\jquery\jquery.slim.min.map" />
+    <EntityDeploy Include="Models\PharmacyContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PharmacyContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PharmacyContext.edmx.diagram">
+      <DependentUpon>PharmacyContext.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\Fonts\NotoSansLao-Light.ttf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2132,16 +2132,22 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Units\Create.cshtml" />
-    <Content Include="Views\Units\Delete.cshtml" />
-    <Content Include="Views\Units\Details.cshtml" />
-    <Content Include="Views\Units\Edit.cshtml" />
-    <Content Include="Views\Units\Index.cshtml" />
+    <Content Include="Views\Sale\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

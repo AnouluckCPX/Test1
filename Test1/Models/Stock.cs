@@ -12,13 +12,18 @@ namespace Test1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StockOut
+    public partial class Stock
     {
         public int ID { get; set; }
         public Nullable<int> ProductID { get; set; }
-        public Nullable<int> AmountA { get; set; }
-        public Nullable<int> AmountB { get; set; }
-        public Nullable<System.DateTime> ExportDate { get; set; }
-        public string UserID { get; set; }
+        public string ProductName { get; set; }
+        public Nullable<int> Price { get; set; }
+        public Nullable<System.DateTime> StockDate { get; set; }
+        public string Unit { get; set; }
+        public string Code { get; set; }
+        public Nullable<int> Qty { get; set; }
+        public string UserName { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public string Description { get; set; }
     }
 }

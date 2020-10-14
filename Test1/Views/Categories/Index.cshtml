@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Test1.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    var i = 1;
+}
+
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href="@Url.Action("Create", "Categories")" class="btn btn-secondary btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-arrow-right"></i>
+        </span>
+        <span class="text">ເພີ່ມ</span>
+    </a>
+</p>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            ປະເພດ
+        </h6>
+    </div>
+    <div class="card-body">
+        <table class="table" id="tb">
+            <thead>
+                <tr>
+                    <th>
+                        ລຳດັບ
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.CateName)*@
+                        ຊື່ປະເພດ
+                    </th>
+                    <th>
+                        ລະຫັດ
+                        @*@Html.DisplayNameFor(model => model.CateCode)*@
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CateName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CateCode)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                            <a href="@Url.Action("Edit","Categories", new { id = item.ID })" class="btn btn-info">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                            <a href="@Url.Action("Delete","Categories", new { id = item.ID })" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Styles{
+
+    <link href="~/Content/Assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/Content/Assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tb').DataTable();
+        });
+    </script>
+}

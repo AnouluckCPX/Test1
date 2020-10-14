@@ -10,107 +10,107 @@ using Test1.Models;
 
 namespace Test1.Controllers
 {
-    public class UnitsController : Controller
+    public class CategoriesController : Controller
     {
-        private TestEntities db = new TestEntities();
+        private PharmacyEntities db = new PharmacyEntities();
 
-        // GET: Units
+        // GET: Categories
         public ActionResult Index()
         {
-            return View(db.Units.ToList());
+            return View(db.Categories.ToList());
         }
 
-        // GET: Units/Details/5
+        // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Unit unit = db.Units.Find(id);
-            if (unit == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(unit);
+            return View(category);
         }
 
-        // GET: Units/Create
+        // GET: Categories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Units/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // POST: Categories/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,UnitName")] Unit unit)
+        public ActionResult Create([Bind(Include = "ID,CateName,CateCode")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Units.Add(unit);
+                db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(unit);
+            return View(category);
         }
 
-        // GET: Units/Edit/5
+        // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Unit unit = db.Units.Find(id);
-            if (unit == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(unit);
+            return View(category);
         }
 
-        // POST: Units/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // POST: Categories/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,UnitName")] Unit unit)
+        public ActionResult Edit([Bind(Include = "ID,CateName,CateCode")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(unit).State = EntityState.Modified;
+                db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(unit);
+            return View(category);
         }
 
-        // GET: Units/Delete/5
+        // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Unit unit = db.Units.Find(id);
-            if (unit == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(unit);
+            return View(category);
         }
 
-        // POST: Units/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Unit unit = db.Units.Find(id);
-            db.Units.Remove(unit);
+            Category category = db.Categories.Find(id);
+            db.Categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

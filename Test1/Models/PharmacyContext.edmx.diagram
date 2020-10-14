@@ -4,15 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1762aa0de58245afa39b20e48324e1e6" Name="Diagram1">
-        <EntityTypeShape EntityType="TestModel.Bill" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestModel.Order" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestModel.StockIn" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestModel.StockOut" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestModel.sysdiagram" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestModel.Unit" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <AssociationConnector Association="TestModel.FK_Product_Unit" ManuallyRouted="false" />
+      <Diagram DiagramId="0513ad00ae8140f98a1bdee82417aef1" Name="Diagram1">
+        <EntityTypeShape EntityType="PharmacyModel.BIll" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.Category" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.Customer" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.Order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyModel.Stock" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="PharmacyModel.FK_BIlls_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyModel.FK_Orders_BIlls" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PharmacyModel.Product" Width="1.5" PointX="3" PointY="5" />
+        <AssociationConnector Association="PharmacyModel.FK_Products_Categories" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

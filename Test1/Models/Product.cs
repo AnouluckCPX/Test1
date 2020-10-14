@@ -15,16 +15,18 @@ namespace Test1.Models
     public partial class Product
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> Price { get; set; }
-        public string FDA { get; set; }
-        public Nullable<int> Qty { get; set; }
-        public Nullable<int> UnitID { get; set; }
-        public string Ingredient { get; set; }
-        public string ImageURL { get; set; }
-        public string Detail { get; set; }
+        public Nullable<int> CateID { get; set; }
+        public string ProductName { get; set; }
+        public Nullable<int> Buy { get; set; }
+        public string Size { get; set; }
+        public string Code { get; set; }
+        public string Ingredients { get; set; }
+        public string ImagePath { get; set; }
+        public string Description { get; set; }
+        public string Unit { get; set; }
         public string Barcode { get; set; }
+        public Nullable<int> Sale { get; set; }
     
-        public virtual Unit Unit { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

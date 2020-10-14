@@ -15,10 +15,15 @@ namespace Test1.Models
     public partial class Order
     {
         public int ID { get; set; }
-        public Nullable<int> BillID { get; set; }
         public Nullable<int> ProductID { get; set; }
+        public string ProductName { get; set; }
         public Nullable<int> Price { get; set; }
         public Nullable<int> Qty { get; set; }
         public string Unit { get; set; }
+        public string Code { get; set; }
+        public string Barcode { get; set; }
+        public Nullable<int> BillID { get; set; }
+    
+        public virtual BIll BIll { get; set; }
     }
 }

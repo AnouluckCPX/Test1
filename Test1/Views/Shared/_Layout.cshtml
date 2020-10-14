@@ -66,6 +66,17 @@
     @*<link href="css/sb-admin-2.min.css" rel="stylesheet">*@
     <link href="~/Content/Assets/css/sb-admin-2.min.css" rel="stylesheet" />
     @RenderSection("styles", required: false)
+
+<style>
+    @@font-face {
+        font-family: 'NotoSansLao-Light';
+        src: url('../../Content/Fonts/NotoSansLao-Light.ttf') format('truetype');
+    }
+
+    * {
+        font-family: 'NotoSansLao-Light';
+    }
+</style>
 </head>
 
 <body id="page-top">
@@ -152,18 +163,18 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>ຈັດການຂໍ້ມູນ</span>
                 </a>
                 <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Manage :</h6>
+                        <a class="collapse-item" href="@Url.Action("Index","Categories")">ຂໍ້ມູນປະເພດ</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Products")">ຂໍ້ມູນສິນຄ້າ</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Customers")">ຂໍ້ມູນລູກຄ້າ</a>
+                        @*<div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
                         <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item active" href="blank.html">Blank Page</a>
+                        <a class="collapse-item active" href="blank.html">Blank Page</a>*@
                     </div>
                 </div>
             </li>

@@ -12,13 +12,19 @@ namespace Test1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StockIn
+    public partial class Category
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Category()
+        {
+            this.Products = new HashSet<Product>();
+        }
+    
         public int ID { get; set; }
-        public Nullable<int> ProductID { get; set; }
-        public Nullable<int> AmountA { get; set; }
-        public Nullable<int> AmountB { get; set; }
-        public Nullable<System.DateTime> ImportDate { get; set; }
-        public string UserID { get; set; }
+        public string CateName { get; set; }
+        public string CateCode { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
