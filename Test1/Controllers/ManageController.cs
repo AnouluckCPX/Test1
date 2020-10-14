@@ -10,7 +10,7 @@ using Test1.Models;
 
 namespace Test1.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
