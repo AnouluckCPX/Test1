@@ -11,17 +11,17 @@ namespace Test1.Controllers
     {
         public ActionResult Index()
         {
-            //Test
-            //return View();
-            if (User.Identity.IsAuthenticated)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
             
+            return View();
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    return View();
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
         }
 
         public ActionResult About()
