@@ -3,43 +3,46 @@
     ViewBag.Title = "Index";
 }
 
-    <div class="row">
+<style>
+
+    .enter {
+        margin-top: 2rem;
+    }
+
+    .p_letf {
+        margin-left: 2rem;
+    }
+
+    .jumbotron {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="row">
 
 
 
-        <div class="col-xl-6 col-md-6 mb-4">
-            <div class="card h-100 py-2 card_custom border-left-primary">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center text-center">
-                        <div class="col mr-2">
+    <div class="col-xl-6 col-md-6 mb-4">
+        <div class="card h-100 py-2 card_custom border-left-primary">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center text-center">
+                    <div class="col mr-2">
 
-                            <div class="row " style="padding-top:10px">
+                        <div class="row " style="padding-top:10px">
 
-                                <div class="col-4">
+                            <div class="col-4">
 
-                                    <div class="text_xl font-weight-bold text-uppercase"> ຕອນນີ້ເວລາ  </div>
-                                </div>
-
-                                <div class="col-4">
-                                    <p class="text_xl font-weight-bold">22/09/2020</p>
-                                </div>
-                                <div class="col-4">
-                                    <p class="text_xl font-weight-bold">12:00:00</p>
-                                </div>
+                                <div class="text_xl font-weight-bold text-uppercase"> ຕອນນີ້ເວລາ  </div>
                             </div>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-6 col-md-6 mb-4">
-            <div class="card h-100 py-2 card_custom border-left-warning">
-                <div class="card-body ">
-                    <div class="row no-gutters align-items-center ">
-                        <div class="col mr-2">
-                            <div class="text_xl font-weight-bold text-uppercase mb-1"> ຈຳນວນເງິນ </div>
+                            <div class="col-4">
+                                <p class="text_xl font-weight-bold">22/09/2020</p>
+                            </div>
+                            <div class="col-4">
+                                <p class="text_xl font-weight-bold">12:00:00</p>
+                            </div>
                         </div>
 
                     </div>
@@ -48,34 +51,159 @@
         </div>
     </div>
 
-    <div class="jumbotron">
-        
-        <div class="row">
-            <div class="col-lg-12">
+    <div class="col-xl-6 col-md-6 mb-4">
+        <div class="card h-100 py-2 card_custom border-left-warning">
+            <div class="card-body ">
+                <div class="row no-gutters align-items-center ">
+                    <div class="col mr-2">
+                        <div class="text_xl font-weight-bold text-uppercase mb-1"> ຈຳນວນເງິນ </div>
+                    </div>
 
-                <a href="#" class="btn btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-flag"></i>
-                    </span>
-                    <span class="text">ເລີ່ມຂາຍໃໝ່</span>
-                </a>
-
-                <a href="#" class="btn btn-success btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-check"></i>
-                    </span>
-                    <span class="text">ໃບບິນລ່າສຸດ</span>
-                </a>
-
-                <a href="#" class="btn btn-info btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-info-circle"></i>
-                    </span>
-                    <span class="text">ຄຳແນະນຳວິທີໃຊ້</span>
-                </a>
-
+                </div>
             </div>
         </div>
-        
     </div>
+</div>
+
+<div class="jumbotron">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <a href="#" class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">ເລີ່ມຂາຍໃໝ່</span>
+            </a>
+
+            <a href="#" class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="text">ໃບບິນລ່າສຸດ</span>
+            </a>
+
+            <a href="#" class="btn btn-info btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-info-circle"></i>
+                </span>
+                <span class="text">ຄຳແນະນຳວິທີໃຊ້</span>
+            </a>
+
+        </div>
+        <div class="col-md-4">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">#</div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="ຊື່ຜູ້ຂາຍ" />
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+
+<div class="jumbotron">
+
+    <div class="row">
+        <form>
+            <div class="form-row align-items-center">
+                <div class="col-sm-2 my-1 ">
+                    <label class="" for="inlineFormInputName">ຈຳນວນ</label>
+                    <input type="text" class="form-control" id="inlineFormInputName">
+                </div>
+                <div class="col-sm-7 my-1">
+                    <div class="p_letf">
+                        <label class="" for="inlineFormInputGroupUsername">ຊື້ສິນຄ້າ</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">#</div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroupUsername">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-sm-3 my-1">
+                    <div class="p_letf">
+                        <label class="" for="inlineFormInputGroupUsername" hidden>Username</label>
+                        <div class="input-group enter">
+
+                            <button type="submit" class="btn btn-primary">ຈົບການຂາຍ</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </form>
+
+
+
+
+
+
+    </div>
+    <br />
+    <div class="table-border-style">
+        <div class="table-responsive">
+            <table class="table ">
+                <thead >
+                    <tr>
+
+
+                        <th>No.</th>
+                        <th>ຮູບສິນຄ້າ</th>
+                        <th>Barcode #</th>
+                        <th>ລາຍການ</th>
+                        <th>ລາຄາ</th>
+                        <th>ຈຳນວນ</th>
+                        <th>ລວມເງິນ</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                
+                <tbody class="table-borderless">
+                    <tr>
+                        <td>1</td>
+                        <td>...</td>
+                        <td>889103</td>
+                        <td>paracetamol 500 mg / ແຜງ</td>
+                        <td>2000</td>
+                        <td>10</td>
+                        <td>20,000</td>
+                        <td><a href="#" class="btn btn-warning"><i class="fa fa-minus-square"></i></a></td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>...</td>
+                        <td>889103</td>
+                        <td>paracetamol 500 mg / ແຜງ</td>
+                        <td>2000</td>
+                        <td>10</td>
+                        <td>20,000</td>
+                        <td><a href="#" class="btn btn-warning"><i class="fa fa-minus-square"></i></a></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+</div>
 
