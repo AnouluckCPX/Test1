@@ -1,0 +1,161 @@
+﻿@moduleWidth: 2px;
+@barColor: #404040;
+@bgColor: #f0f0f0;
+@digitHeight: 18px;
+@digitFontSize: 14px;
+@digitColor: #802020;
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    padding: 0;
+    background: #e0e0e0;
+}
+
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    position: relative;
+    top: 40%;
+    display: table;
+    margin: -50px auto;
+    padding: 10px 15px;
+    background: @bgColor;
+    box-shadow: 0px 1px 10px -5px #000;
+    border-radius: 3px;
+}
+
+li {
+    display: table-cell;
+    position: relative;
+    width: 7 * @moduleWidth;
+    height: 100px;
+    overflow: hidden;
+    &::before
+
+{
+    content: '';
+    position: absolute;
+    left: -@moduleWidth;
+    top: 0;
+    width: @moduleWidth;
+    bottom: @digitHeight;
+}
+
+&::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    height: @digitHeight;
+    line-height: @digitHeight;
+    color: @digitColor;
+    font-family: 'Courier New', mono;
+    font-weight: bold;
+    font-size: @digitFontSize;
+}
+
+.bar(@pos, @color) {
+    box-shadow +: (@moduleWidth * (@pos + 1)) 0px 0px 0px @color;
+}
+
+.bar7(@a, @b, @c, @d, @e, @f, @g) {
+    .bar(0, @a);
+    .bar(1, @b);
+    .bar(2, @c);
+    .bar(3, @d);
+    .bar(4, @e);
+    .bar(5, @f);
+    .bar(6, @g);
+}
+
+.digit(@digit, @a, @b, @c, @d, @e, @f, @g) {
+    &.digit-@
+
+{
+    digit
+}
+
+{
+    &::before
+
+{
+    .bar7(@a, @b, @c, @d, @e, @f, @g);
+}
+
+&::after {
+    content: '@{digit}';
+}
+
+}
+}
+
+.digitBank(@X, @_) {
+    .digit(0, @_, @_, @_, @X, @X, @_, @X);
+    .digit(1, @_, @_, @X, @X, @_, @_, @X);
+    .digit(2, @_, @_, @X, @_, @_, @X, @X);
+    .digit(3, @_, @X, @X, @X, @X, @_, @X);
+    .digit(4, @_, @X, @_, @_, @_, @X, @X);
+    .digit(5, @_, @X, @X, @_, @_, @_, @X);
+    .digit(6, @_, @X, @_, @X, @X, @X, @X);
+    .digit(7, @_, @X, @X, @X, @_, @X, @X);
+    .digit(8, @_, @X, @X, @_, @X, @X, @X);
+    .digit(9, @_, @_, @_, @X, @_, @X, @X);
+}
+
+// odd and even parity sides
+&:nth-child(2),
+&:nth-child(3),
+&:nth-child(4),
+&:nth-child(5),
+&:nth-child(6),
+&:nth-child(7) {
+    .digitBank(@barColor, @bgColor);
+}
+
+&:nth-child(9),
+&:nth-child(10),
+&:nth-child(11),
+&:nth-child(12),
+&:nth-child(13),
+&:nth-child(14) {
+    .digitBank(@bgColor, @barColor);
+}
+
+&.start, &.end {
+    width: @moduleWidth * 3;
+    &::before
+
+{
+    bottom: @digitHeight * 0.5;
+    .bar(0, @barColor);
+    .bar(1, @bgColor);
+    .bar(2, @barColor);
+}
+
+}
+
+&.mid {
+    width: @moduleWidth * 5;
+    &::before
+
+{
+    bottom: @digitHeight * 0.5;
+    .bar(0, @bgColor);
+    .bar(1, @digitColor);
+    .bar(2, @bgColor);
+    .bar(3, @digitColor);
+    .bar(4, @bgColor);
+}
+
+}
+}

@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    int i = 1;
 }
 
 <p>
@@ -22,6 +23,9 @@
         <table class="table" id="tb">
             <thead>
                 <tr>
+                    <th>
+                        ລຳດັບ
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.ProductName)
                     </th>
@@ -64,6 +68,9 @@
                 @foreach (var item in Model)
                 {
                 <tr>
+                    <td>
+                        @i
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ProductName)
                     </td>
@@ -111,6 +118,7 @@
                         </a>
                     </td>
                 </tr>
+                    i++;
                 }
             </tbody>
         </table>

@@ -39,7 +39,25 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                        @*@Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <select class="form-control" name="Gender" id="Gender">
+                            @if (Model.Gender == "M")
+                            {
+                                <option value="M" selected>M</option>
+                            }
+                            else
+                            {
+                                <option value="M">M</option>
+                            }
+                            @if (Model.Gender == "F")
+                            {
+                                <option value="F" selected>F</option>
+                            }
+                            else
+                            {
+                                <option value="F">F</option>
+                            }
+                        </select>
                         @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -47,7 +65,8 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.BirthDay, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.BirthDay, new { htmlAttributes = new { @class = "form-control" } })
+                        @*@Html.EditorFor(model => model.BirthDay, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="text" name="BirthDay" id="BirthDay" class="form-control" value="@Model.BirthDay.Value.ToString("MM/dd/yyyy")" />
                         @Html.ValidationMessageFor(model => model.BirthDay, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -71,7 +90,8 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @*@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <textarea class="form-control" name="Description" id="Description">@Model.Description</textarea>
                         @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                     </div>
                 </div>

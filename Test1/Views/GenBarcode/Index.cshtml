@@ -1,0 +1,136 @@
+﻿@model IEnumerable<Test1.Models.Product>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Barcode</h2>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            ສ້າງ Barcode ຈາກຂໍ້ມູນສິນຄ້າ
+        </h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+
+            <div class="form-horizontal">
+                <hr />
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="barcode">ຊື່ສິນຄ້າ</label>
+                    <div class="col-md-10">
+                        <select class="form-control" id="barcode" name="barcode">
+                            @foreach (var item in Model)
+                            {
+                                <option value="@item.Barcode">@item.ProductName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button class="btn btn-success btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text">ສ້າງ</span>
+                        </button>
+                        @if (ViewBag.Barcode != null)
+                        {
+                            <button type="button" class="btn btn-primary btn-icon-split" onclick="printDiv()">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-print"></i>
+                                </span>
+                                <span class="text">Print</span>
+                            </button>
+                         }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@if (ViewBag.Barcode != null)
+{
+    <div class="container" id="printMe">
+        <table>
+            @for (int i = 0; i < 14; i++)
+            {
+                <tr>
+                    <td>
+                        <div class="demo"></div>
+                    </td>
+                    <td>
+                        <div class="demo"></div>
+                    </td>
+                    <td>
+                        <div class="demo"></div>
+                    </td>
+                    <td>
+                        <div class="demo"></div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+
+@section Styles{
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .demo{
+            height:100px;
+        }
+    </style>
+}
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="~/Content/jquery-barcode.min.js"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function () {
+            $('#barcode').select2();
+
+            var settings = {
+                barWidth: 2,
+                barHeight: 70,
+                moduleSize: 5,
+                showHRI: true,
+                addQuietZone: true,
+                marginHRI: 5,
+                bgColor: "#FFFFFF",
+                color: "#000000",
+                fontSize: 12,
+                output: "css",
+                posX: 0,
+                posY: 0
+            };
+            $(".demo").barcode(
+                "@ViewBag.Barcode", // Value barcode (dependent on the type of barcode)
+                "code128", // type (string)
+                settings
+            );
+        });
+
+        function printDiv() {
+
+            var divToPrint = document.getElementById('printMe');
+
+            var newWin = window.open('', 'Print-Window');
+
+            newWin.document.open();
+
+            newWin.document.write('<html><link href="/Content/Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+
+            newWin.document.close();
+
+            setTimeout(function () { newWin.close(); }, 10);
+
+
+
+        }
+    </script>
+}

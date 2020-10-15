@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    int i = 1;
 }
 <p>
     <a href="@Url.Action("Create", "Customers")" class="btn btn-secondary btn-icon-split">
@@ -22,6 +23,9 @@
         <table class="table" id="tb">
             <thead>
                 <tr>
+                    <th>
+                        ລຳດັບ
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Firstname)
                     </th>
@@ -51,6 +55,9 @@
                 {
                     <tr>
                         <td>
+                            @i
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.Firstname)
                         </td>
                         <td>
@@ -60,7 +67,8 @@
                             @Html.DisplayFor(modelItem => item.Gender)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.BirthDay)
+                            @*@Html.DisplayFor(modelItem => item.BirthDay)*@
+                            @item.BirthDay.Value.ToString("yyyy-MM-dd")
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Weight)
@@ -80,6 +88,7 @@
                             </a>
                         </td>
                     </tr>
+                    i++;
                 }
             </tbody>
         </table>
