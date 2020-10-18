@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Test1.Models;
 
 namespace Test1.Controllers
 {
@@ -11,7 +12,9 @@ namespace Test1.Controllers
         // GET: Sale
         public ActionResult Index()
         {
-            return View();
+            var db = new PharmacyEntities();
+            var products = db.Products.ToList();
+            return View(products);
         }
     }
 }

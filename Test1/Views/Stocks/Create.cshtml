@@ -1,0 +1,161 @@
+﻿@model Test1.Models.Stock
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>ເພີ່ມ</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Stock In</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.ProductID, "ProductID", htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2" for="ProductID">ເລືອກສິນຄ້າ</label>
+        <div class="col-md-10">
+            @Html.DropDownList("ProductID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2" for="Unit">ຫົວໜ່ວຍ</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control" } })
+
+            @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <input type="hidden" name="ProductName" id="ProductName"/>
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+<div class="form-group">
+    @*@Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })*@
+    <label class="control-label col-md-2" for="Price">ລາຄາຊື້</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.StockDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StockDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StockDate, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+<div class="form-group">
+    @*@Html.LabelFor(model => model.Qty, htmlAttributes: new { @class = "control-label col-md-2" })*@
+    <label class="control-label col-md-2" for="Qty">ຈຳນວນ</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })*@
+            <textarea class="form-control" name="Description" id="Description"></textarea>
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @*<input type="submit" value="Create" class="btn btn-default" />*@
+            <a href="@Url.Action("Index", "Stocks")" class="btn btn-light btn-icon-split">
+                <span class="icon text-gray-600">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">ກັບຄືນ</span>
+            </a>
+            <button class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="text">ບັນທຶກ</span>
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Styles{
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ProductID').select2();
+        })
+
+        function getProductDetail(id) {
+            //var id = $('#ProductID').val();
+
+            $.ajax({
+                url: '../GetProductDetail/Index?id=' + id,
+                type: 'GET',
+                success: function (response) {
+                    console.log(response);
+
+                    $('#ProductName').val(response.ProductName);
+                    $('#Unit').val(response.Unit);
+                    $('#Price').val(response.Price);
+                }
+            });
+        }
+        $("#ProductID").on('change', function (e) {
+            // Access to full data
+            var data = $(this).select2('data');
+            var id = data[0].id;
+            console.log(id);
+
+            getProductDetail(id);
+        });
+    </script>
+}

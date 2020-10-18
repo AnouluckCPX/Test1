@@ -1,0 +1,142 @@
+﻿@model IEnumerable<Test1.Models.Stock>
+
+@{
+    ViewBag.Title = "Index";
+    int i = 1;
+}
+
+
+<p>
+    <a href="@Url.Action("Create", "Stocks")" class="btn btn-secondary btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-arrow-right"></i>
+        </span>
+        <span class="text">ເພີ່ມ</span>
+    </a>
+</p>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            Stock In
+        </h6>
+    </div>
+    <div class="card-body">
+        <table class="table" id="tb">
+            <thead>
+                <tr>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.ProductID)*@
+                        ລຳດັບ
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.ProductName)*@
+                        ຊື່ສິນຄ້າ
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.Unit)*@
+                        ຫົວໜ່ວຍ
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.Price)*@
+                        ລາຄາຊື້
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.Qty)*@
+                        ຈຳນວນ
+                    </th>
+                    <th>
+                        ລວມລາຄາ
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.StockDate)*@
+                        ເວລາ Stock In
+                    </th>
+
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.Code)
+                        </th>*@
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var sum = item.Qty * item.Price;
+                    <tr>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.ProductID)*@
+                            @i
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Unit)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.Price)*@
+                            @String.Format("{0:n0}", item.Price)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.Qty)*@
+                            @String.Format("{0:n0}", item.Qty)
+                        </td>
+                        <td>
+                            @String.Format("{0:n0}", sum)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StockDate)
+                        </td>
+
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.Code)
+                            </td>*@
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details","Stocks", new { id = item.ID })" class="btn btn-info">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Styles{
+
+    <link href="~/Content/Assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/Content/Assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tb').DataTable();
+        });
+    </script>
+}

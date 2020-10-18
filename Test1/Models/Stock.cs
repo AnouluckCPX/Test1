@@ -23,7 +23,9 @@ namespace Test1.Models
         public string Code { get; set; }
         public Nullable<int> Qty { get; set; }
         public string UserName { get; set; }
-        public Nullable<bool> Status { get; set; }
+        public string Status { get; set; }
         public string Description { get; set; }
+    
+        public virtual Product Product { get; set; }
     }
 }

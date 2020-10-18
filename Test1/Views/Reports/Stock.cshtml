@@ -1,0 +1,84 @@
+﻿@model Test1.Models.ReportStockModel
+@{
+    ViewBag.Title = "Stock";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            Report Stock
+        </h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="StartDate">ເລືອກວວັນທີ່ແຕ່</label>
+                <div class="col-md-5">
+                    <input type="date" class="form-control" id="StartDate" name="StartDate" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="EndDate">ຫາວັນທີ່</label>
+                <div class="col-md-5">
+                    <input type="date" class="form-control" id="EndDate" name="EndDate" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="User">ເລືອກ User</label>
+                <div class="col-md-5">
+                    <select class="form-control" id="User" name="User">
+                        @foreach (var item in Model.Users)
+                        {
+                            <option value="@item.UserName">@item.UserName</option>
+                        }
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Product">ເລືອກສິນຄ້າ</label>
+                <div class="col-md-5">
+                    <select class="form-control" id="Product" name="Product">
+                        @foreach (var item in Model.Products)
+                        {
+                            <option value="@item.ID">@item.ProductName</option>
+                        }
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button class="btn btn-success btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">OK</span>
+                    </button>
+                </div>
+            </div>
+        }
+       
+    </div>
+</div>
+
+@section Styles{
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#User').select2();
+            $('#Product').select2();
+        })
+
+        
+    </script>
+}
+

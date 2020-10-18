@@ -1,7 +1,531 @@
-﻿
+﻿@model IEnumerable<Test1.Models.Product>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Sale</h2>
+
+<style>
+
+    .enter {
+        margin-top: 2rem;
+    }
+
+    .p_letf {
+        margin-left: 2rem;
+    }
+
+    .jumbotron {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .modal-content {
+        width: 900px;
+    }
+
+
+    .disTotal {
+        background-color: #00B879;
+        color: #ffffff;
+        padding: 5px;
+    }
+
+    .disVAT {
+        color: #EB1818;
+    }
+</style>
+
+<div class="row">
+
+
+
+    <div class="col-xl-6 col-md-6 mb-4">
+        <div class="card  card_custom border-left-warning">
+
+            <div class="card-body ">
+
+
+                <a href="@Url.Action("Index","Sale")" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-flag"></i>
+                    </span>
+                    <span class="text">ເລີ່ມຂາຍໃໝ່</span>
+                </a>
+
+                <a href="#" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">ໃບບິນລ່າສຸດ</span>
+                </a>
+
+                <a href="#" class="btn btn-info btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-info-circle"></i>
+                    </span>
+                    <span class="text">ຄຳແນະນຳວິທີໃຊ້</span>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6 mb-4">
+        <div class="card  card_custom border-left-warning">
+
+            <div class="card-body ">
+                <div class="row no-gutters align-items-center ">
+
+
+
+                    <div class="col-sm-4 ">
+                        <div class="text_xl font-weight-bold text-uppercase mb-1"> ຈຳນວນເງິນ </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <h3 class="disTotal text-right" id="Total">0</h3>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="jumbotron">
+
+    <div class="row">
+        <form>
+            <div class="form-row align-items-center">
+                <div class="col-sm-2 my-1 ">
+                    <label class="" for="inlineFormInputName">ຈຳນວນ</label>
+                    <input type="number" class="form-control" id="Qty" name="Qty" value="1">
+                </div>
+                <div class="col-sm-7 my-1">
+                    <div class="p_letf">
+                        <label class="" for="inlineFormInputGroupUsername">ຊື້ສິນຄ້າ</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <a href="#" data-toggle="modal" data-target="#exampleModal2">#</a>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" id="Barcode" name="Barcode" placeholder="ລະຫັດ Barcode">
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- End Sales -->
+
+                <div class="col-sm-3 my-1">
+                    <div class="p_letf">
+                        <label class="" for="inlineFormInputGroupUsername" hidden>Username</label>
+                        <div class="input-group enter">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                ຈົບການຂາຍ
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+    <br />
+
+    <div class="table-border-style">
+        <div class="table-responsive">
+            <table class="table ">
+                <thead>
+                    <tr>
+
+
+                        @*<th>No.</th>*@
+                        @*<th>ຮູບສິນຄ້າ</th>*@
+                        <th>Barcode #</th>
+                        <th>ລາຍການ</th>
+                        <th>ລາຄາ</th>
+                        <th>ຈຳນວນ</th>
+                        <th>ສ່ວນຫຼຸດ/ອັນ</th>
+                        <th>ລວມເງິນ</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody class="table-borderless" id="DataOrder">
+                    <!--<tr>
+                        <td>1</td>-->
+                    @*<td>...</td>*@
+                    <!--<td>889103</td>
+                        <td>paracetamol 500 mg / ແຜງ</td>
+                        <td>2000</td>
+                        <td>10</td>
+                        <td>
+                            <input type="text" class="" style="width:65px;" id="inlineFormInputGroupUsername">
+
+                        </td>
+                        <td>20,000</td>
+                        <td><a href="#" class="btn btn-warning"><i class="fa fa-minus-square"></i></a></td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>-->
+                    @*<td>...</td>*@
+                    <!--<td>889103</td>
+                        <td>paracetamol 500 mg / ແຜງ</td>
+                        <td>2000</td>
+                        <td>10</td>
+                        <td>
+                            <input type="text" class="" style="width:65px;" id="inlineFormInputGroupUsername">
+
+                        </td>
+                        <td>20,000</td>
+                        <td><a href="#" class="btn btn-warning"><i class="fa fa-minus-square"></i></a></td>
+                    </tr>-->
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<!-- Form Modal Dialog 1 -->
+
+<div>
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="exampleModalLabel">ຮັບເງິນການຊຳລະ</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xl-5 col-md-5 mb-4">
+                            <div class="card h-100 py-2 card_custom">
+                                <div class="card-body">
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-7 col-md-7 mb-4">
+                            <div class="card h-100 py-2 card_custom">
+                                <div class="card-body">
+
+                                    <div class="form-group row">
+
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">ຈຳນວນເງິນທັງໝົດ</label>
+
+                                        <div class="col-sm-8">
+                                            @*<label for="inputEmail3" class="col-sm-12 disTotal col-form-label text-right" id="Total">0</label>*@
+                                            <h3 class="disTotal text-right" id="Total2">0</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">ຊ່ອງທາງການຊຳລະ</label>
+
+                                        <div class="col-sm-8">
+                                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                <option selected>Choose...</option>
+                                                <option value="1">ເງິນສົດ</option>
+                                                <option value="2">ໂອນ</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">ຮັບເງິນ</label>
+
+                                        <div class="col-sm-5">
+                                            <input type="email" class="form-control" id="inputEmail3" placeholder="" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="button" class="btn btn-primary">ຈ່າຍເຕັມ</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">VAT 5%</label>
+
+                                        <div class="col-sm-8">
+                                            <label for="inputEmail3" class="col-sm-12 col-form-label text-left disVAT">105,000.00</label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">ຍອດເງິນທີ່ຕ້ອງຈ່າຍ</label>
+
+                                        <div class="col-sm-8">
+                                            <label for="inputEmail3" class="col-sm-12 disTotal col-form-label text-right">105,000.00</label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">ເງິນທອນ</label>
+
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">45,000.00</label>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ປິດ</button>
+                    <button type="button" class="btn btn-primary">ຈົບການຂາຍ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Form Modal Dialog 2-->
+
+<div>
+    <div class="modal fade bd-example-modal-lg" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="exampleModalLabel">ລາຍການສິນຄ້າ</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="card-body">
+                            <div class="form-group row">
+
+                                <div class="col-md-5">
+                                    <select class="form-control" id="Product" name="Product">
+                                        <option> --------------- ກຸລະນາເລືອກສິນຄ້າ --------------- </option>
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.ID">@item.ProductName</option>
+                                        }
+                                    </select>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="number" class="form-control" id="Qty2" placeholder="ຈຳນວນ" value="1" />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-primary" onclick="selectOrder()">ສະແດງຂ້ມູນ</button>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="table-border-style">
+                                <div class="table-responsive">
+                                    <table class="table ">
+                                        <thead>
+                                            <tr>
+
+                                                <th></th>
+                                                <th>ລະຫັດ</th>
+                                                <th>ຊື່</th>
+                                                <th>ປະເພດ</th>
+                                                @*<th>ລາຄາຕົ້ນທຶນ</th>*@
+                                                <th>ລາຄາຂາຍ</th>
+                                                <th>ສ່ວນຫຼຸດ</th>
+                                                @*<th>ມີ VAT</th>*@
+                                            </tr>
+                                        </thead>
+
+                                        <tbody class="table-borderless" id="DataProduct">
+                                            <!--<tr>
+                                                <td><button class="btn btn-primary"  data-dismiss="modal">ເລືອກ</button></td>
+                                                <td>125589</td>
+                                                <td>Beer Lao</td>
+                                                <td>ນ້ຳ</td>
+                                                <td>5,000.00</td>
+                                                <td>10,000.00</td>
+                                                <td>0.00</td>-->
+                                                @*<td></td>*@
+
+                                            <!--</tr>-->
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ປິດ</button>
+                    @*<button type="button" class="btn btn-primary">ຈົບການຂາຍ</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles{
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Product').select2();
+        })
+        $('#Barcode').bind("enterKey", function (e) {
+            //alert("Enter");
+
+            var qty = $('#Qty').val();
+            if (qty <= 0) {
+                alert('ກະລຸນາໃສ່ຈຳນວນ.');
+            } else {
+                getProductDetail(qty);
+            }
+
+        });
+        $('#Barcode').keyup(function (e) {
+            if (e.keyCode == 13) {
+                $(this).trigger("enterKey");
+            }
+        });
+
+        function getProductDetail(qty) {
+            var barcode = $('#Barcode').val();
+
+            $.ajax({
+                url: '../GetProductDetail/Barcode?Barcode=' + barcode,
+                type: 'GET',
+                success: function (response) {
+                    //alert(JSON.stringify(response));
+                    if (response.Barcode == null) {
+                        alert("ລະຫັດ Barcode ບໍ່ຖືກຕ້ອງ!!");
+                    } else {
+                        appendTableOrder(response, qty)
+                    }
+                }
+            })
+        }
+
+        function selectProduct(id) {
+            var qty = $('#Qty2').val();
+            var id = $('#Product').val();
+
+            $.ajax({
+                url: '../GetProductDetail/Index?id=' + id,
+                type: 'GET',
+                success: function (response) {
+                    appendTableOrder(response, qty);
+                }
+            })
+        }
+
+        function appendTableOrder(response, qty) {
+            var sum = response.Price * qty;
+            var tr = '';
+            tr += '<tr id="' + response.uuid + '"  class="item-model-number">';
+            //tr += '<td>1</td>';
+            tr += '<td>' + response.Barcode + '</td>';
+            tr += '<td>' + response.ProductName + '</td>';
+            tr += '<td>' + response.Price + '</td>';
+            tr += '<td>' + qty + '</td>';
+            tr += '<td>';
+            tr += '<input type="number"  style="width:65px;" id="txt-' + response.uuid + '" oninput="changeSum(\'' + response.uuid + '\', ' + qty + ', ' + response.Price + ')">';
+            tr += '</td>';
+            tr += '<td id="sum-' + response.uuid + '" class="value">' + sum + '</td>';
+            tr += '<td>';
+            tr += '<button class="btn btn-warning" onclick="removeOrder(\'' + response.uuid + '\')"><i class="fa fa-minus-square"></i></button>';
+            tr += '</td>';
+            tr += '</tr>';
+
+            $('#DataOrder').append(tr);
+            $('#Barcode').val('');
+            $('#Qty').val(1);
+
+            totalOrder();
+           
+        }
+
+        function selectOrder(){
+            var id = $('#Product').val();
+
+            $.ajax({
+                url: '../GetProductDetail/Index?id=' + id,
+                type: 'GET',
+                success: function (response) {
+                    var tr = '';
+                    tr += '<tr>';
+                    tr += '<td><button class="btn btn-primary" onclick="selectProduct()"  data-dismiss="modal">ເລືອກ</button></td>';
+                    tr += '<td>' + response.id + '</td>';
+                    tr += '<td>' + response.ProductName + '</td>';
+                    tr += '<td>' + response.Category + '</td>';
+                    tr += '<td>' + response.Price + '</td>';
+                    tr += '<td>' + response.Discount + '</td>';
+                    tr += '</tr>';
+
+                    $('#DataProduct').append(tr);
+                }
+            })
+
+        }
+
+        function changeSum(uuid, qty, price) {
+            var discount = $('#txt-' + uuid).val();
+            var sum = (price * qty) - discount;
+            $('#sum-' + uuid).html(sum)
+        }
+
+        function removeOrder(uuid) {
+            $('#' + uuid).remove();
+        }
+
+        function totalOrder() {
+            var number = 0;
+            $(".item-model-number .value").each(function () {
+                var value = $(this).text();
+                console.log(value);
+                number = number + parseInt(value);
+                $('#Total').html(number);
+                $('#Total2').html(number);
+            })
+        }
+    </script>
+}
+
 

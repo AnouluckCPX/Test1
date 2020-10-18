@@ -14,6 +14,12 @@ namespace Test1.Models
     
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.Stocks = new HashSet<Stock>();
+        }
+    
         public int ID { get; set; }
         public Nullable<int> CateID { get; set; }
         public string ProductName { get; set; }
@@ -28,5 +34,7 @@ namespace Test1.Models
         public Nullable<int> Sale { get; set; }
     
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Stock> Stocks { get; set; }
     }
 }

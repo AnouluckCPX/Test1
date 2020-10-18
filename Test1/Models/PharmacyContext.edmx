@@ -81,7 +81,7 @@
           <Property Name="Code" Type="nvarchar" MaxLength="50" />
           <Property Name="Qty" Type="int" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Status" Type="bit" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_BIlls_Customer">
@@ -120,6 +120,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Stock_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PharmacyModelStoreContainer">
           <EntitySet Name="BIlls" EntityType="Self.BIlls" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
@@ -139,11 +151,39 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
+          <AssociationSet Name="FK_Stock_Products" Association="Self.FK_Stock_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PharmacyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PharmacyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BIlls" EntityType="PharmacyModel.BIll" />
+          <EntitySet Name="Categories" EntityType="PharmacyModel.Category" />
+          <EntitySet Name="Customers" EntityType="PharmacyModel.Customer" />
+          <EntitySet Name="Orders" EntityType="PharmacyModel.Order" />
+          <EntitySet Name="Products" EntityType="PharmacyModel.Product" />
+          <EntitySet Name="Stocks" EntityType="PharmacyModel.Stock" />
+          <AssociationSet Name="FK_BIlls_Customer" Association="PharmacyModel.FK_BIlls_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="BIll" EntitySet="BIlls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_BIlls" Association="PharmacyModel.FK_Orders_BIlls">
+            <End Role="BIll" EntitySet="BIlls" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="PharmacyModel.FK_Products_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Products" Association="PharmacyModel.FK_Stock_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="BIll">
           <Key>
             <PropertyRef Name="ID" />
@@ -154,8 +194,8 @@
           <Property Name="Discount" Type="Int32" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CustomerID" Type="Int32" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_BIlls_Customer" FromRole="BIlls" ToRole="Customer" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_BIlls" FromRole="BIlls" ToRole="Orders" />
+          <NavigationProperty Name="Customer" Relationship="PharmacyModel.FK_BIlls_Customer" FromRole="BIll" ToRole="Customer" />
+          <NavigationProperty Name="Orders" Relationship="PharmacyModel.FK_Orders_BIlls" FromRole="BIll" ToRole="Order" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -178,7 +218,7 @@
           <Property Name="Weight" Type="Double" />
           <Property Name="Height" Type="Double" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BIlls" Relationship="Self.FK_BIlls_Customer" FromRole="Customer" ToRole="BIlls" />
+          <NavigationProperty Name="BIlls" Relationship="PharmacyModel.FK_BIlls_Customer" FromRole="Customer" ToRole="BIll" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -193,68 +233,8 @@
           <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BillID" Type="Int32" />
-          <NavigationProperty Name="BIll" Relationship="Self.FK_Orders_BIlls" FromRole="Orders" ToRole="BIlls" />
+          <NavigationProperty Name="BIll" Relationship="PharmacyModel.FK_Orders_BIlls" FromRole="Order" ToRole="BIll" />
         </EntityType>
-        <EntityType Name="Stock">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductID" Type="Int32" />
-          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Int32" />
-          <Property Name="StockDate" Type="DateTime" Precision="3" />
-          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Qty" Type="Int32" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_BIlls_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="BIlls" Type="Self.BIll" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="BIlls">
-              <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Orders_BIlls">
-          <End Role="BIlls" Type="Self.BIll" Multiplicity="0..1" />
-          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BIlls">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="BillID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="PharmacyEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BIlls" EntityType="Self.BIll" />
-          <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="Stocks" EntityType="Self.Stock" />
-          <AssociationSet Name="FK_BIlls_Customer" Association="Self.FK_BIlls_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="BIlls" EntitySet="BIlls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Orders_BIlls" Association="Self.FK_Orders_BIlls">
-            <End Role="BIlls" EntitySet="BIlls" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <EntitySet Name="Products" EntityType="PharmacyModel.Product" />
-          <AssociationSet Name="FK_Products_Categories" Association="PharmacyModel.FK_Products_Categories">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ID" />
@@ -272,7 +252,49 @@
           <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sale" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="PharmacyModel.FK_Products_Categories" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Stocks" Relationship="PharmacyModel.FK_Stock_Products" FromRole="Product" ToRole="Stock" />
         </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="StockDate" Type="DateTime" Precision="3" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="PharmacyModel.FK_Stock_Products" FromRole="Stock" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_BIlls_Customer">
+          <End Type="PharmacyModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="PharmacyModel.BIll" Role="BIll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BIll">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_BIlls">
+          <End Type="PharmacyModel.BIll" Role="BIll" Multiplicity="0..1" />
+          <End Type="PharmacyModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIll">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="BillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Products_Categories">
           <End Type="PharmacyModel.Category" Role="Category" Multiplicity="0..1" />
           <End Type="PharmacyModel.Product" Role="Product" Multiplicity="*" />
@@ -285,7 +307,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_Stock_Products">
+          <End Type="PharmacyModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="PharmacyModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -294,67 +328,50 @@
           <EntitySetMapping Name="BIlls">
             <EntityTypeMapping TypeName="PharmacyModel.BIll">
               <MappingFragment StoreEntitySet="BIlls">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="BillDate" ColumnName="BillDate" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="BillDate" ColumnName="BillDate" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="PharmacyModel.Category">
               <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CateName" ColumnName="CateName" />
                 <ScalarProperty Name="CateCode" ColumnName="CateCode" />
+                <ScalarProperty Name="CateName" ColumnName="CateName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="PharmacyModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="PharmacyModel.Order">
               <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="BillID" ColumnName="BillID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Stocks">
-            <EntityTypeMapping TypeName="PharmacyModel.Stock">
-              <MappingFragment StoreEntitySet="Stock">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="StockDate" ColumnName="StockDate" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -372,6 +389,23 @@
                 <ScalarProperty Name="Buy" ColumnName="Buy" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="CateID" ColumnName="CateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="PharmacyModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="StockDate" ColumnName="StockDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
