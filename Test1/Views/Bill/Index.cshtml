@@ -1,0 +1,280 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>BillNo.</title>
+
+    <style>
+    .invoice-box {
+        max-width: 226px;
+        margin: auto;
+        padding: 10px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        font-size: 10px;
+        line-height: 10px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
+
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+    }
+
+    .invoice-box table td {
+        padding: 3px;
+        vertical-align: top;
+    }
+
+    .invoice-box table tr td:nth-child(3) {
+        text-align: right;
+    }
+
+    .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+    }
+
+    .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+    }
+
+    .invoice-box table tr.heading td {
+        background: rgb(255, 255, 255);
+        border-bottom: 1px solid rgb(163, 161, 161);
+        font-weight: bold;
+    }
+
+    .invoice-box table tr.details td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.item td{
+        border-bottom: 1px solid #eee;
+    }
+
+    .invoice-box table tr.item.last td {
+        border-bottom: none;
+    }
+
+
+    .invoice-box table tr.total td:nth-child(2) {
+        text-align: right;
+        font-weight: bold;
+    }
+
+
+    .invoice-box table tr.total td:nth-child(3) {
+        font-weight: bold;
+    }
+
+    
+
+    /** RTL **/
+    .rtl {
+        direction: rtl;
+        font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    }
+
+    .rtl table {
+        text-align: right;
+    }
+
+    .rtl table tr td:nth-child(2) {
+        text-align: left;
+    }
+
+
+    .total{
+        font-size: 11px;
+    }
+
+    .bor{
+        margin-top: 3px;
+        margin-bottom: 3px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .tablefooter{
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+    }
+
+    .title{
+        display: block;
+        text-align: center;
+    }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="invoice-box">
+
+
+
+        <table>
+
+            <tr>
+                <td class="title">
+                    <img src="~/Content/Images/pp.png" style="width:100%; max-width:40px; text-align: center;">
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center; font-weight: 600;">
+                    Sillivong Phamercy
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center; padding-bottom: 10px;">
+                    ບ້ານວັງຊາຍ ສໄຊເສດຖາ ນະຄອນຫຼວງ
+                </td>
+            </tr>
+
+            <tr>    
+                <td style="text-align: center; font-weight: 600;">
+                    ໃບຮັບເງິນ
+                </td>
+
+            </tr>
+            <tr>
+                <td style="text-align: center;">
+                    ເລກທີ: 44589754-89556
+                </td>
+
+            </tr>
+
+        </table>
+
+        <table>
+            <tr class="information">
+                <td>
+                    ລູກຄ້າທົ່ວໄປ <br>
+                </td>
+                <td style="text-align: right;">
+                    11/10/2020 15:44
+                </td>
+            </tr>
+
+            <tr class="information">
+                <td>
+                    User: somsak
+                </td>
+            </tr>
+
+        </table>
+
+        <table cellpadding="0" cellspacing="0">
+
+            <tr class="heading">
+                <td>
+                    ຈຳນວນ
+                </td>
+                <td>
+                    ລາຍການ
+                </td>
+                <td>
+                    ລາຄາ
+                </td>
+            </tr>
+
+            <tr class="item">
+                <td>
+                    10
+                </td>
+                <td>
+                    Paracetamol 500mg / ແຜງ
+                </td>
+                <td>
+                    20,000
+                </td>
+            </tr>
+
+            <tr class="item">
+                <td>
+                    10
+                </td>
+                <td>
+                    Amoxicillin 500mg / ແຜງ
+                </td>
+                <td>
+                    20,000
+                </td>
+            </tr>
+
+
+
+            <tr style=" text-align: right;  ">
+                <td style="padding-top: 5px;"></td>
+                <td style="padding-top: 5px;">ຍອດເງິນທັງໝົດ:</td>
+                <td style="padding-top: 5px;">
+                    40,000
+                </td>
+            </tr>
+
+            <tr class="total">
+                <td></td>
+                <td>ລວມຍອດເງິນ:</td>
+                <td>
+                    40,000
+                </td>
+            </tr>
+
+            <tr style="text-align: right; ">
+                <td></td>
+                <td>ເງິນສົດ:</td>
+                <td>
+                    40,000
+                </td>
+            </tr>
+
+            <tr style="text-align: right;">
+                <td></td>
+                <td>ທອນ:</td>
+                <td>
+                    0.00
+                </td>
+            </tr>
+
+        </table>
+
+        <table>
+            <div style="text-align: center; padding-top: 5px;">
+                ລາຄາສິນຄ້າທັງໝົດແມ່ນລວມ ອມພ ແລ້ວ
+            </div>
+            <div class="bor">
+
+            </div>
+
+            <tr>
+                <td style="padding: 0px; text-align: center;">
+                    ຂອບໃຈທີ່ທ່ານມາອຸດໜູນ TEL: 021 555555
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding: 0px; text-align: center;">
+                    ສິນຄ້າທີ່ທ່ານຊື້ໄປແລ້ວບໍ່ສາມາດປ່ຽນຄືນໄດ້
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+

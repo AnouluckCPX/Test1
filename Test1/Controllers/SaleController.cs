@@ -10,6 +10,7 @@ namespace Test1.Controllers
     public class SaleController : Controller
     {
         // GET: Sale
+        [HttpGet]
         public ActionResult Index()
         {
             var db = new PharmacyEntities();
