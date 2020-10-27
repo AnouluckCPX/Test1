@@ -2153,19 +2153,6 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Customers\Create.cshtml" />
-    <Content Include="Views\Customers\Delete.cshtml" />
-    <Content Include="Views\Customers\Details.cshtml" />
-    <Content Include="Views\Customers\Edit.cshtml" />
-    <Content Include="Views\Customers\Index.cshtml" />
-    <Content Include="Views\GenBarcode\Index.cshtml" />
-    <Content Include="Views\Stocks\Create.cshtml" />
-    <Content Include="Views\Stocks\Delete.cshtml" />
-    <Content Include="Views\Stocks\Details.cshtml" />
-    <Content Include="Views\Stocks\Edit.cshtml" />
-    <Content Include="Views\Stocks\Index.cshtml" />
-    <Content Include="Views\Reports\Stock.cshtml" />
-    <Content Include="Views\Bill\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
